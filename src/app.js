@@ -1,6 +1,6 @@
 import { ApolloServer, gql } from 'apollo-server';
 
-const posts = [
+const AllPosts = [
   {
     id: '1',
     text: 'post one',
@@ -20,11 +20,23 @@ const typeDefs = gql`
   type Query {
     posts: [Post]
   }
+
+  type Mutation {
+    createPost(text: String!): Post
+  }
 `;
 
 const resolvers = {
   Query: {
-    posts: () => posts,
+    posts: () => AllPosts,
+  },
+
+  Mutation: {
+    createPost: (_, { text }) => {
+      AllPosts.push({ id: AllPosts.length + 1, text });
+
+      return AllPosts[AllPosts.length - 1];
+    },
   },
 };
 
