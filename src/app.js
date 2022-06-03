@@ -48,4 +48,8 @@ export const app = new ApolloServer({
   typeDefs,
   resolvers,
   csrfPrevention: true,
+  cors: {
+    origin: 'https://studio.apollographql.com',
+    credentials: true,
+  },
 });
